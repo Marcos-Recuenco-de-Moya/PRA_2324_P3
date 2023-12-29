@@ -12,7 +12,7 @@ class Dict {
 	virtual void insert(string key, V value) = 0;
 	virtual V search(string key) = 0;
 	virtual V remove(string key) = 0;
-	virtual int entrie() = 0;
+	virtual int entries() const = 0; //para el operador que usa th.entries (que funciona con const)
 };
 
 #endif
