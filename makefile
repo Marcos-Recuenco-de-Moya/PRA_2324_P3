@@ -1,5 +1,5 @@
 bin/testTableEntry: TableEntry.h testTableEntry.cpp
 	mkdir -p bin
-	g++ -o bin/testTableEntry TableEntry.h testTableEntry.cpp
+	g++ -o bin/testTableEntry testTableEntry.cpp
 clean:
-	rm -r *.o *.gch bin
+	rm -rf *.o *.gch bin

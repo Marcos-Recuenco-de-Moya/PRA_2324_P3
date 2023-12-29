@@ -4,7 +4,7 @@
 #define TABLEENTRY_H
 
 #include <string>
-#include <ostream>
+#include <iostream>
 
 using namespace std;
 
@@ -28,21 +28,23 @@ class TableEntry {
 		key = "";
 	}
 
-	friend bool operator== (const TableEntry<V> &te1, const TableEntry<V> &te2){
+	friend bool operator==(const TableEntry<V> &te1, const TableEntry<V> &te2){
 		if(te1.key == te2.key){
 			return true;
-		}
-		return false;
-	}
-
-	friend bool operator!= (const TableEntry<V> &te1, const TableEntry<V> &te2){
-		if(te1.key != te2.key){
+		}else{
 			return false;
 		}
-		return true;
 	}
 
-	friend ostream &operator << (ostream &out, const TableEntry<V> &te){
+	friend bool operator!=(const TableEntry<V> &te1, const TableEntry<V> &te2){
+		if(te1.key != te2.key){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	friend ostream &operator<<(ostream &out, const TableEntry<V> &te){
 
 		out << "Clave: " << te.key << " -- Valor:  " << te.value << endl;
 		return out;
