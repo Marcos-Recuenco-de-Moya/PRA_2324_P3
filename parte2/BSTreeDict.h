@@ -54,7 +54,7 @@ class BSTreeDict: public Dict<V> {
 		return aux;
 	}
 
-	virtual int entries() override{
+	virtual int entries() const override{
 		return tree->size();
 	}
 };

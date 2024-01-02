@@ -66,7 +66,7 @@ class BSTree {
                 }else{
                         if(n->left != nullptr && n->right != nullptr){ //2 hijos
                                 n->elem = max(n->left);
-                                n->left = reove_max(n->left);
+                                n->left = remove_max(n->left);
                         }else{ //1 o 0 Hijos
                                 if(n->left != nullptr){
                                         n = n->left;
@@ -124,7 +124,7 @@ class BSTree {
 	//Búsqueda de elementos
 	
 	T search(T e) const{
-		return search(root, e).elem;
+		return search(root, e)->elem;
 	}
 
 	T operator[](T e) const{
