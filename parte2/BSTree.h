@@ -67,7 +67,7 @@ class BSTree {
 			}
 
 			//out << "Node: " << n->elem << std::endl;
-			out << *n;
+			out << *n << " ";
 
 			if(n->right != nullptr){
 				print_inorder(out, n->right);
@@ -89,12 +89,14 @@ class BSTree {
                         if(n->left != nullptr && n->right != nullptr){ //2 hijos
                                 n->elem = max(n->left);
                                 n->left = remove_max(n->left);
+				nelem--;
                         }else{ //1 o 0 Hijos
                                 if(n->left != nullptr){
                                         n = n->left;
                                 }else{
                                         n = n->right;
                                 }
+				nelem--;
                         }
                 }
 		return n;
