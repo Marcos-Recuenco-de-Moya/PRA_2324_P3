@@ -26,7 +26,7 @@ class BSTreeDict: public Dict<V> {
 	}
 
 	friend ostream& operator<<(ostream &out, const BSTreeDict<V> &bs){
-		out << bs.tree[0];
+		out << *(bs.tree);
 		return out;
 	}
 
@@ -40,7 +40,7 @@ class BSTreeDict: public Dict<V> {
 
 	virtual void insert(string key, V value) override{
 		TableEntry<V> aux(key,value);
-		tree -> insert(aux);	
+		tree->insert(aux);	
 	}
 
 	virtual V search(string key) override{

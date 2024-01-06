@@ -18,8 +18,8 @@ class BSTree {
 	//Método Privado de Búsqueda de Elementos
 	
 	BSNode<T> *search(BSNode<T> *n , T e) const{
-                if(n=nullptr){
-                        throw runtime_error("No se ha encontrado el elemento en el Árbol.\n");
+                if(n==nullptr){
+                        throw runtime_error("Element not found!\n");
                 }else if(n->elem < e){
                         return search(n->right, e);
                 }else if(n->elem > e){
@@ -32,10 +32,10 @@ class BSTree {
 	//Método Privado de Inserción de Elementos
 	
 	BSNode<T>* insert(BSNode<T>* n, T e){
-                if(n = nullptr){
+                if(n == nullptr){
                         return new BSNode<T>(e);
                 }else if(n->elem == e){
-                        throw runtime_error("Elemento duplicado.\n");
+                        throw runtime_error("Duplicated element!\n");
                 }else if(n->elem < e){
                         n->right = insert(n->right, e);
                 }else{
@@ -45,20 +45,39 @@ class BSTree {
         }
 
 	//Método Privado de Recorrido INORDER
-	
-	void print_inorder(std::ostream &out, BSNode<T> *n) const{
-                if(n != nullptr){
+    public:
+	void print_inorder(std::ostream &out, BSNode<T> *n = nullptr) const{
+                if(n==nullptr){
+			n = root;
+		}
+
+		/*if(n != nullptr){
                         print_inorder(out, n->left);
-                        out << *n;
+                        out << "Node: " << n->elem << std::endl;
                         print_inorder(out , n->right);
                 }
+		*/
+
+		if(n !=nullptr){
+			if(n->left != nullptr){
+				print_inorder(out, n->left);
+			}
+
+			//out << "Node: " << n->elem << std::endl;
+			out << *n;
+
+			if(n->right != nullptr){
+				print_inorder(out, n->right);
+			}
+		}
         }
+	
 
 	//Métodos Privados de Eliminación de Elementos
-	
+    private:
 	 BSNode<T>* remove(BSNode<T>* n, T e){
-                if(n = nullptr){
-                        throw runtime_error("Elemento no encontrado.\n");
+                if(n == nullptr){
+                        throw runtime_error("Element not found!\n");
                 }else if(n->elem < e){
                         n->right = remove(n->right, e);
                 }else if(n->elem > e){
@@ -79,8 +98,8 @@ class BSTree {
         }
 
         T max(BSNode<T>* n) const{
-                if(n = nullptr){
-                        throw runtime_error("Elemento no encontrado.\n");
+                if(n == nullptr){
+                        throw runtime_error("Element not found!\n");
                 }else if(n->right != nullptr){
                         return max(n->right);
                 }else{
@@ -105,11 +124,11 @@ class BSTree {
                         delete_cascade(n->right);
                         delete n;
                 }
-                return;
         }
 
 
     public:
+
         // miembros públicos
 	
 	BSTree(){
@@ -141,7 +160,7 @@ class BSTree {
 	//Recorrido e Impresión del Árbol
 	
 	friend std::ostream& operator<<(std::ostream &out, const BSTree<T> &bst){
-		bst.print_inorder(out, bst.root);
+		bst.print_inorder(out);
 		return out;
 	}
 
