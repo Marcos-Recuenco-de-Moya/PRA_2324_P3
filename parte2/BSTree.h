@@ -33,7 +33,9 @@ class BSTree {
 	
 	BSNode<T>* insert(BSNode<T>* n, T e){
                 if(n == nullptr){
-                        return new BSNode<T>(e);
+                        //return new BSNode<T>(e);
+			n = new BSNode<T>(e);
+			nelem++;
                 }else if(n->elem == e){
                         throw runtime_error("Duplicated element!\n");
                 }else if(n->elem < e){
@@ -42,6 +44,7 @@ class BSTree {
                         n->left = insert(n->left, e);
                 }
                 return n;
+		
         }
 
 	//Método Privado de Recorrido INORDER
@@ -94,7 +97,7 @@ class BSTree {
                                 }
                         }
                 }
-                return n;
+		return n;
         }
 
         T max(BSNode<T>* n) const{
@@ -112,7 +115,7 @@ class BSTree {
                         return n->left;
                 }else{
                         n->right = remove_max(n->right);
-                        return n;
+			return n;
                 }
         }
 
