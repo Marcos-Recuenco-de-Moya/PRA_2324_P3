@@ -62,24 +62,6 @@ class HashTable: public Dict<V> {
 	
 	//MIEMBROS HEREDADOS DE DICT.H
 
-/*
-	void insert(string key, V value) override {
-		int pos = h(key);
-
-                if((operator==(this->key, key)) == true){
-			for(int i=0 ; i<n ; i++){
-				table[pos].get(i).key;
-			}
-
-                        throw runtime_error ("La clave ya existe en el diccionario.\n");
-                }else{
-			TableEntry<V> aux(key, value);
-			table[pos].prepend(aux);
-			n++;
-		}
-	}
-*/
-
   	V search(string key) override{ 
     		int pos = h(key);
     		for(int i = 0; i < table[pos].size(); i++){
