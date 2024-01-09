@@ -1,3 +1,5 @@
+//Define una clase "HashTable" que hereda de al interfaz "Dict"
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
@@ -6,7 +8,7 @@
 #include "Dict.h"
 #include "TableEntry.h"
 
-#include "../../P1/PRA_2324_P1/ListLinked.h"  //Modificado
+#include "../../P1/PRA_2324_P1/ListLinked.h"  //Incluir el archivo ListLinked.h
 
 using namespace std;
 
@@ -17,9 +19,9 @@ class HashTable: public Dict<V> {
         // Atributos privados de HashTable
 	int n;
 	int max;
-	ListLinked<TableEntry<V>> *table;
+	ListLinked<TableEntry<V>> *table; //puntero a una lista enlazada TableEntry<V>
 
-	int h(string key){
+	int h(string key){ //función Hash que coge caracter a caracter y hace la suma de su ASCII y luego lo divide por el modulo del maximo
 		int res = 0;
 		for(int i=0 ; i< key.length() ; i++){
 			char c = key.at(i);
@@ -27,6 +29,17 @@ class HashTable: public Dict<V> {
 		}
 		return res % max;
 	}
+	
+	/* otra función hash
+	int h(string key){
+		int res = 1;
+		for(int i=0 ; i< key.length() ; i++){
+			char c = key.at(i);
+			res = (res * (i+1) * int(c)) % max;
+		}
+		return res;
+	}
+	*///multiplica el codigo ASCII de cada caracter por la posición en la que esta y luego hace el modulo de max
 
     public:
  	//MIEMBROS DE HASHTABLE.H
@@ -41,11 +54,11 @@ class HashTable: public Dict<V> {
 		delete[] table;
 	}
 
-	int capacity() const{
+	int capacity() const{ //no modifica el estado interno del objeto (es como una operación de solo lectura)
 		return max;
 	}
 
-	friend ostream &operator<< (ostream &out, const HashTable<V> &th){
+	friend ostream &operator<< (ostream &out, const HashTable<V> &th){ //impresión de la Tabla Hash
 		out << "HashTable [entries: " << th.entries() << ", capacity: " << th.capacity() << "]\n";
 		out << "==============\n\n";
 
@@ -62,7 +75,7 @@ class HashTable: public Dict<V> {
 	
 	//MIEMBROS HEREDADOS DE DICT.H
 
-  	V search(string key) override{ 
+  	V search(string key) override{ //buscar un elemento a traves de su clave
     		int pos = h(key);
     		for(int i = 0; i < table[pos].size(); i++){
       			if(table[pos].get(i).key == key){
@@ -111,7 +124,7 @@ class HashTable: public Dict<V> {
   	}
 
 
-	int entries() const override{
+	int entries() const override{ 
                 return n;
         }
         

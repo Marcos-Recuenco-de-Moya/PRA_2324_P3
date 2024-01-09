@@ -18,21 +18,21 @@ class BSTree {
 	//Método Privado de Búsqueda de Elementos
 	
 	BSNode<T> *search(BSNode<T> *n , T e) const{
-                if(n==nullptr){
+                if(n==nullptr){ //elemento no esta en el arbol
                         throw runtime_error("Element not found!\n");
-                }else if(n->elem < e){
+                }else if(n->elem < e){ 
                         return search(n->right, e);
                 }else if(n->elem > e){
                         return search(n->left, e);
                 }else{
-                        return n;
+                        return n; //devuelve el nodo buscado
                 }
         }
 
 	//Método Privado de Inserción de Elementos
 	
 	BSNode<T>* insert(BSNode<T>* n, T e){
-                if(n == nullptr){
+                if(n == nullptr){ //siempre pasa por aquí, porque inserta en nodos vacíos
                         //return new BSNode<T>(e);
 			n = new BSNode<T>(e);
 			nelem++;
@@ -49,7 +49,7 @@ class BSTree {
 
 	//Método Privado de Recorrido INORDER
     public:
-	void print_inorder(std::ostream &out, BSNode<T> *n = nullptr) const{
+	void print_inorder(std::ostream &out, BSNode<T> *n = nullptr) const{ //Se puede partir de un nodo específico o si no hay nada se parte del nulo (*n = nullptr)
                 if(n==nullptr){
 			n = root;
 		}
@@ -79,13 +79,13 @@ class BSTree {
 	//Métodos Privados de Eliminación de Elementos
     private:
 	 BSNode<T>* remove(BSNode<T>* n, T e){
-                if(n == nullptr){
+                if(n == nullptr){ //el elemento no esta en el arbol
                         throw runtime_error("Element not found!\n");
                 }else if(n->elem < e){
                         n->right = remove(n->right, e);
                 }else if(n->elem > e){
                         n->left = remove(n->left, e);
-                }else{
+                }else{ //hemos encontrado el nodo a eliminar
                         if(n->left != nullptr && n->right != nullptr){ //2 hijos
                                 n->elem = max(n->left);
                                 n->left = remove_max(n->left);
@@ -102,7 +102,7 @@ class BSTree {
 		return n;
         }
 
-        T max(BSNode<T>* n) const{
+        T max(BSNode<T>* n) const{ //encuentra el elemento maximo en un subárbol (el elemento mas a la derecha en un subárbol)
                 if(n == nullptr){
                         throw runtime_error("Element not found!\n");
                 }else if(n->right != nullptr){
@@ -112,7 +112,7 @@ class BSTree {
                 }
         }
 
-        BSNode<T>* remove_max(BSNode<T>* n){
+        BSNode<T>* remove_max(BSNode<T>* n){ //elimina el nodo con el valor máximo en un subarbol
                 if(n->right == nullptr){
                         return n->left;
                 }else{
@@ -123,7 +123,7 @@ class BSTree {
 
 	//Método Privado de Destrucción de Elementos
 	
-	void delete_cascade(BSNode<T> *n){
+	void delete_cascade(BSNode<T> *n){ //elimina todos los nodos del arbol
                 if(n != nullptr){
                         delete_cascade(n->left);
                         delete_cascade(n->right);
@@ -141,17 +141,17 @@ class BSTree {
 		root = nullptr;
 	}
 
-	int size() const{
+	int size() const{ //return numero elementos en el arbol
 		return nelem;
 	}
 
 	//Búsqueda de elementos
 	
-	T search(T e) const{
+	T search(T e) const{ //busca un elemento llamando al metodo privado
 		return search(root, e)->elem;
 	}
 
-	T operator[](T e) const{
+	T operator[](T e) const{ //permite acceder a un elemento específico 
 		return search(e);
 	}
 

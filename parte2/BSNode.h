@@ -1,3 +1,5 @@
+//clase BSNode para un arbol binario de búsqueda
+
 #ifndef BSNODE_H
 #define BSNODE_H
 

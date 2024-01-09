@@ -25,12 +25,12 @@ class BSTreeDict: public Dict<V> {
 		delete tree;
 	}
 
-	friend ostream& operator<<(ostream &out, const BSTreeDict<V> &bs){
+	friend ostream& operator<<(ostream &out, const BSTreeDict<V> &bs){ //imprimir el arbol
 		out << *(bs.tree);
 		return out;
 	}
 
-	V operator[](string key){
+	V operator[](string key){ //acceder al valor asociado a una clave en el diccionario
 		return search(key);
 	}
 
@@ -38,25 +38,31 @@ class BSTreeDict: public Dict<V> {
 	//Metodos heredados
 	
 
-	virtual void insert(string key, V value) override{
+	virtual void insert(string key, V value) override{ //inserta par clave-valor
 		TableEntry<V> aux(key,value);
 		tree->insert(aux);	
 	}
 
-	virtual V search(string key) override{
+	virtual V search(string key) override{ //buscar par clave-valor
 		TableEntry<V> aux = tree->search(key);
 		return aux.value;
 	}
 
-	virtual V remove(string key)override{
+	virtual V remove(string key)override{ //eliminar par clave-valor
 		V aux = search(key);
 		tree->remove(key);
 		return aux;
 	}
 
-	virtual int entries() const override{
+	virtual int entries() const override{ //obtener numero de elemento
 		return tree->size();
 	}
+	
+	/*
+	bool containsKey(string key) const{
+		return tree->search(key) != nullptr;
+	}
+	*/
 };
 
 #endif
